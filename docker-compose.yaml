@@ -9,6 +9,9 @@ services:
     ports:
      - 8080:8080
      - 50000:50000
+    volumes:
+      - jenkins-data:/var/lib/jenkins/data
+      - jenkins-agent-data:/var/lib/jenkins/agent-data
 volumes:
     jenkins-data:
     jenkins-agent-data:
