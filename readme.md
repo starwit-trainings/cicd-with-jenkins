@@ -18,7 +18,7 @@ mvn -B archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -Darch
 
 Additional Task: Create a Jira ticket and do the same task again by using the branch creation ability of Jira. Hence, the branch and git commits are connected to the ticket
 
-### Task 2 - Maven Introduction
+### 03-Dependency-Management: Task 2 - Maven Introduction
 
 1. Install Prerequisites (Maven 3, JDK11 or higher)
 1. Create your own Maven Project via archetype:
@@ -37,10 +37,11 @@ Additional Task: Read Json file and add a personalized welcome message. E.G.
         "message": "Herzlich willkommen"
     }
     ```
-    Hint: use maven-assembly-plugin or maven shade plugin
+    Hint: use maven-assembly-plugin or maven-shade-plugin
 
 ## Day 2
 
+### 05-Maven
 ### Task 3 - Maven with Subprojects
 
 1. Go to Usermanagement
@@ -56,6 +57,7 @@ Additional Task: Read Json file and add a personalized welcome message. E.G.
 1. Go to target/surefire-reports and see Surefire results
 1. Go to target/site and open html site in browser
 
+### 06-STACC
 ### Task 5 - Jenkins Pipeline Execution
 
 1. Add a "Hello World" Jenkins pipeline to your project
