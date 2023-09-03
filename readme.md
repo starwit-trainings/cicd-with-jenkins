@@ -3,9 +3,10 @@ Here, you can find example project for setting up CICD with Jenkins
 https://github.com/starwit-trainings/spring-boot/tree/main/testexample
 mvn -B archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 
-# Day 1
+# Practice
+## Day 1
 
-## Task 1 - Git Usage
+### Task 1 - Git Usage
 
 1. Create a Branch with your name in it via GitHub
 1. Clone project in your IDE
@@ -17,7 +18,7 @@ mvn -B archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -Darch
 
 Additional Task: Create a Jira ticket and do the same task again by using the branch creation ability of Jira. Hence, the branch and git commits are connected to the ticket
 
-## Task 2 - Maven Introduction
+### Task 2 - Maven Introduction
 
 1. Install Prerequisites (Maven 3, JDK11 or higher)
 1. Create your own Maven Project via archetype:
@@ -36,33 +37,42 @@ Additional Task: Read Json file and add a personalized welcome message. E.G.
         "message": "Herzlich willkommen"
     }
     ```
+    Hint: use maven-assembly-plugin or maven shade plugin
 
-# Day 2
+## Day 2
 
-## Task 3 - Maven with Subprojects
+### Task 3 - Maven with Subprojects
 
 1. Go to Usermanagement
 1. Execute mvn clean package
 1. Execute `mvn dependency:tree`
 
-## Task 4 - JUnit Testing
+### Task 4 - JUnit Testing
 
 1. Take a project of your choice and add a Unit test
 1. Execute JUnit test in your IDE and with Maven
 1. Create a failing Unit Test
-1. See Surefire results
+1. execute `mvn site`
+1. Go to target/surefire-reports and see Surefire results
+1. Go to target/site and open html site in browser
 
-## Task 5 - Jenkins Pipeline Execution
+### Task 5 - Jenkins Pipeline Execution
 
 1. Add a "Hello World" Jenkins pipeline to your project
 1. Execute pipeline and see results
 
-# Day 3 
+## Day 3 
 
-## Task 6 - Jenkins Maven Execution
+### Task 6 - Jenkins Maven Execution
 
-## Task 7 - Jenkins Unit Testing
+1. Add new Jenkins Pipeline
+1. Check maven and JDK Configurations
+1. Add Jenkins pipeline for your project
 
-## Task 8 - CICD with Jira
+### Task 7 - Jenkins Unit Testing
+
+### Task 8 - CICD with Jira
+
+### Addons
 
 Addon: Jenkins build with Docker
