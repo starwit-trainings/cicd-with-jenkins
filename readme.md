@@ -25,16 +25,44 @@ Additional Task: Create a Jira ticket and do the same task again by using the br
     mvn -B archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
     ```
 1. Check dependencies and plugins
-1. See maven livecycle phases and goals: https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22#:~:text=Phases%20are%20the%20steps%20in,to%20building%20and%20managing%20project.
+1. See maven [livecycle phases and goals](https://medium.com/@yetanothersoftwareengineer/maven-lifecycle-phases-plugins-and-goals-25d8e33fa22#:~:text=Phases%20are%20the%20steps%20in,to%20building%20and%20managing%20project).
 1. Try to execute your program and find out what is missing
 
-Additional Task: Read Json file and add a personalized welcome message.
+Additional Task: Read Json file and add a personalized welcome message. E.G.
 
     ```
     {
-        "name": "Anett",
+        "name": "Flaschengeist",
         "message": "Herzlich willkommen"
     }
     ```
 
+# Day 2
 
+## Task 3 - Maven with Subprojects
+
+1. Go to Usermanagement
+1. Execute mvn clean package
+1. Execute `mvn dependency:tree`
+
+## Task 4 - JUnit Testing
+
+1. Take a project of your choice and add a Unit test
+1. Execute JUnit test in your IDE and with Maven
+1. Create a failing Unit Test
+1. See Surefire results
+
+## Task 5 - Jenkins Pipeline Execution
+
+1. Add a "Hello World" Jenkins pipeline to your project
+1. Execute pipeline and see results
+
+# Day 3 
+
+## Task 6 - Jenkins Maven Execution
+
+## Task 7 - Jenkins Unit Testing
+
+## Task 8 - CICD with Jira
+
+Addon: Jenkins build with Docker
