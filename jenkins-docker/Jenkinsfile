@@ -5,7 +5,6 @@ pipeline {
         app = ''
     }
     stages {
-        def app
         stage('Build') {
             steps {
                 app = docker.build("starwit-app")
