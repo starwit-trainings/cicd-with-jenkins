@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    tools { 
+        maven 'maven' 
+        jdk 'jdk17' 
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                sh '''
+                    cd starwit-app
+                    mvn -B -DskipTests clean package
+                ''' 
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''
+                    cd starwit-app
+                    mvn test
+                ''' 
+            }
+            post {
+                always {
+                    junit  skipPublishingChecks: true, testResults: 'starwit-app/target/surefire-reports/*.xml'
+                }
+            }
+        }
+    }
+}
