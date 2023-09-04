@@ -1,9 +1,8 @@
 pipeline {
     environment {
-        registry = "gustavoapolinario/docker-test"
-        registryCredential = 'dockerhub'
         app = ''
     }
+    agent any
     stages {
         stage('Build') {
             steps {
