@@ -1,9 +1,14 @@
 pipeline {
+    environment {
+        registry = "gustavoapolinario/docker-test"
+        registryCredential = 'dockerhub'
+        app = ''
+    }
     stages {
-    def app
+        def app
         stage('Build') {
             steps {
-            app = docker.build("starwit-app")
+                app = docker.build("starwit-app")
             }
         }
         stage('Test image') {
