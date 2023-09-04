@@ -35,5 +35,13 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build') {
+            steps {
+                sh '''
+                    cd starwit-app
+                    docker build -t starwit-app .
+                ''' 
+            }
+        }
     }
 }
