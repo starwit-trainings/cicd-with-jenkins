@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage('Deployment') {
+            steps {
+                script {
+                    kubernetesDeploy(configs: "deployment/test-config.yaml")
+                }
+            }
+        }
+}
