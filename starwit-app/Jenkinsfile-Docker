@@ -8,12 +8,18 @@ pipeline {
   stages {
     stage('Building image') {
       steps{
+        sh "cd starwit-app"
+      }
+      steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
     stage('Deploy Image') {
+      steps{
+        sh "cd starwit-app"
+      }
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -22,7 +28,6 @@ pipeline {
         }
       }
     }
-    stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
