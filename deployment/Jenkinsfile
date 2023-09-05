@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh '''
                     echo $USER
+                    echo $KUBECONFIG
                     cd deployment
                     kubectl get all --all-namespaces
                     kubectl -n default apply -f test-config.yaml
