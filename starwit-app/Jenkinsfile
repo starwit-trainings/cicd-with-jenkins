@@ -4,16 +4,10 @@ pipeline {
         maven 'maven' 
         jdk 'jdk17' 
     }
+    environment {     
+        DOCKERHUB_CREDENTIALS= credentials('docker-hub-credentials')     
+    }
     stages {
-        stage ('Initialize') {
-            steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
-            }
-        }
-
         stage ('Build') {
             steps {
                 sh '''
@@ -35,21 +29,36 @@ pipeline {
                 }
             }
         }
-        stage('Docker Build') {
+        stage('Login to Docker Hub') {      	
+            steps{                       	
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+                echo 'Login Completed'      
+            }           
+        } 
+        stage('docker build') {
             steps {
                 sh '''
                     cd starwit-app
-                    docker build -t starwit-app .
+                    docker build -t witchpoutraining/starwit-app .
                 ''' 
             }
         }
-        stage('Docker Push') {
+        stage('docker push') {
             steps {
                 sh '''
                     cd starwit-app
-                    docker build -t starwit-app .
+                    docker push witchpoutraining/starwit-app
                 ''' 
             }
         }
+            post {
+                always {
+                    steps {
+                        sh '''
+                            docker logout
+                        ''' 
+                    }
+                }
+            }
     }
 }
