@@ -6,6 +6,7 @@ pipeline {
                 sh '''
                     echo $USER
                     echo $KUBECONFIG
+                    cat /var/lib/jenkins/.kube/k3s.yaml
                     cd deployment
                     kubectl get all --all-namespaces
                     kubectl -n default apply -f test-config.yaml
