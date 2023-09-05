@@ -51,13 +51,11 @@ pipeline {
                 ''' 
             }
         }
-        post {
-            always {
-                steps {
-                    sh '''
-                        docker logout
-                    ''' 
-                }
+        stage('docker logout') {
+            steps {
+                sh '''
+                    docker logout
+                ''' 
             }
         }
     }
