@@ -1,11 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Deployment') {
+        stage('kubectl get all') {
             steps {
-                script {
-                    kubernetesDeploy(configs: "deployment/test-config.yaml")
-                }
+                sh '''
+                    cd deployment
+                    kubectl get all --all-namespaces
+                    kubectl -n default apply -f test-config.yaml
+                ''' 
             }
         }
     }
