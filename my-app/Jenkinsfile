@@ -64,11 +64,5 @@ pipeline {
                 sh "docker logout" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
         }
-        post {
-            always {
-                junit  skipPublishingChecks: true, testResults: 'my-app/target/surefire-reports/*.xml'
-                sh "docker logout"
-            }
-        }
     }
 }
