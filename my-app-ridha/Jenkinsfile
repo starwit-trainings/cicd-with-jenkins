@@ -1,58 +1,41 @@
 pipeline {
-environment {
-    registry = "docker.io"
-    registryCredential = 'docker-hub-credentials'
-    dockerImage = ''
-  }
-    agent any
-    tools {
-        maven 'maven'
-        jdk 'jdk17'
+  agent any
+    environment {
+    // stored into https://jenkins.starwit-infra.de:1443/manage/credentials/
+        DOCKERHUB_CREDENTIALS= credentials('docker-hub-credentials')
     }
     stages {
-        stage ('Initialize') {
+        stage('docker version') {
+            steps {
+                sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
+            }
+        }
+        stage('Login to Docker Hub') {
+            steps{
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo 'Login Completed'
+            }
+        }
+        stage('docker build') {
             steps {
                 sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
+                    cd starwit-app
+                    docker build -t witchpoutraining/starwit-app .
                 '''
             }
         }
-
-        stage ('Build') {
+        stage('docker push') {
             steps {
                 sh '''
-                    cd my-app-ridha
-                    mvn -B -DskipTests clean package
+                    cd starwit-app
+                    docker push witchpoutraining/starwit-app
                 '''
             }
         }
-        stage('Test') {
+        stage('docker logout') {
             steps {
-                sh '''
-                    cd my-app-ridha
-                    mvn test
-                '''
-            }
-            post {
-                always {
-                    junit  skipPublishingChecks: true, testResults: 'my-app-ridha/target/surefire-reports/*.xml'
-                }
+                sh "docker logout" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
         }
-        stage('Docker Build') {
-            steps {
-                sh '''
-                    cd my-app-ridha
-                    docker build -t my-app-ridha .
-                '''
-            }
-        }
-
-        stage('Push image') {
-                     withDockerRegistry([ registryCredential: "docker-hub-credentials", registry: "hub.docker.com" ]) {
-                     dockerImage.push()
-                     }
-                 }
     }
 }
