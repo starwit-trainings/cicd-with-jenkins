@@ -19,16 +19,16 @@ pipeline {
         stage('docker build') {
             steps {
                 sh '''
-                    cd starwit-app
-                    docker build -t witchpoutraining/starwit-app .
+                    cd my-app-ridha
+                    docker build -t witchpoutraining/my-app-ridha .
                 '''
             }
         }
         stage('docker push') {
             steps {
                 sh '''
-                    cd starwit-app
-                    docker push witchpoutraining/starwit-app
+                    cd my-app-ridha
+                    docker push witchpoutraining/my-app-ridha
                 '''
             }
         }
