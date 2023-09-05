@@ -43,5 +43,13 @@ pipeline {
                 ''' 
             }
         }
+        stage('Docker Push') {
+            steps {
+                sh '''
+                    cd starwit-app
+                    docker build -t starwit-app .
+                ''' 
+            }
+        }
     }
 }
