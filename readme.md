@@ -48,7 +48,7 @@ Additional Task: Read Json file and add a personalized welcome message. E.G.
 1. Execute mvn clean package
 1. Execute `mvn dependency:tree`
 
-### Task 4 - JUnit Testing
+### Task 4 - JUnit Testing & Reporting
 
 1. Take a project of your choice and add a Unit test
 1. Execute JUnit test in your IDE and with Maven
@@ -57,21 +57,34 @@ Additional Task: Read Json file and add a personalized welcome message. E.G.
 1. Go to target/surefire-reports and see Surefire results
 1. Go to target/site and open html site in browser
 
+maven-surefire-plugin
+maven-surefire-report-plugin
+
 ### 06-STACC
 ### Task 5 - Jenkins Pipeline Execution
 
 1. Add a "Hello World" Jenkins pipeline to your project
 1. Execute pipeline and see results
 
-## Day 3 
-
 ### Task 6 - Jenkins Maven Execution
 
-1. Add new Jenkins Pipeline
+1. Add new Jenkins Pipeline for your project
 1. Check maven and JDK Configurations
-1. Add Jenkins pipeline for your project
 
 ### Task 7 - Jenkins Unit Testing
+
+1. Add Unit Testing to your pipeline
+
+### Task 8 - Docker build
+
+Build your project with docker
+1. Create Dockerfile
+1. Add Docker build to Jenkins Pipeline
+
+## Day 3 
+
+
+
 
 ### Task 8 - CICD with Jira
 
