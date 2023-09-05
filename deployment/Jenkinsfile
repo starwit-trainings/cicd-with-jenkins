@@ -12,7 +12,7 @@ pipeline {
                     cd deployment
                     kubectl get all --all-namespaces
                     kubectl -n default apply -f test-config.yaml
-                    kubectl create configmap hello-world --from-file index.html
+                    kubectl apply -f demo-config.yaml
                     kubectl apply -f demo.yaml
                 ''' 
             }
