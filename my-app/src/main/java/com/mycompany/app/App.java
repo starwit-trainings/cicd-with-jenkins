@@ -8,6 +8,9 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+       reader reader = new reader();
+       testWelcome test = reader.readFile("/test.json");
+       System.out.println( test.getMessage()+" Herr " + test.getName());
     }
+
 }
