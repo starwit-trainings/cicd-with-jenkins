@@ -35,5 +35,14 @@ pipeline {
                 }
             }
         }
+        stage('Docker Build') {
+                    steps {
+                        sh '''
+                            cd my-app
+                            docker build -t my-app .
+                        '''
+                    }
+                }
+            }
     }
 }
