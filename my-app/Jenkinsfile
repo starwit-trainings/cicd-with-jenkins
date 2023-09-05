@@ -17,7 +17,7 @@ pipeline {
         stage ('Build') {
             steps {
                 sh '''
-                    cd starwit-app
+                    cd my-app
                     mvn -B -DskipTests clean package
                 '''
             }
@@ -25,22 +25,14 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''
-                    cd starwit-app
+                    cd my-app
                     mvn test
                 '''
             }
             post {
                 always {
-                    junit  skipPublishingChecks: true, testResults: 'starwit-app/target/surefire-reports/*.xml'
+                    junit  skipPublishingChecks: true, testResults: 'my-app/target/surefire-reports/*.xml'
                 }
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                sh '''
-                    cd starwit-app
-                    docker build -t starwit-app .
-                '''
             }
         }
     }
