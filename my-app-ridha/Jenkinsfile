@@ -1,4 +1,9 @@
 pipeline {
+environment {
+    registry = "docker.io"
+    registryCredential = 'docker-hub-credentials'
+    dockerImage = ''
+  }
     agent any
     tools {
         maven 'maven'
@@ -43,5 +48,11 @@ pipeline {
                 '''
             }
         }
+
+        stage('Push image') {
+                     withDockerRegistry([ registryCredential: "docker-hub-credentials", registry: "hub.docker.com" ]) {
+                     dockerImage.push()
+                     }
+                 }
     }
 }
