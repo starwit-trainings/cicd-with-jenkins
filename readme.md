@@ -57,6 +57,9 @@ Additional Task: Read Json file and add a personalized welcome message. E.G.
 1. Go to target/surefire-reports and see Surefire results
 1. Go to target/site and open html site in browser
 
+maven-surefire-plugin
+maven-surefire-report-plugin
+
 ### 06-STACC
 ### Task 5 - Jenkins Pipeline Execution
 
