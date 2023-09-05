@@ -2,7 +2,7 @@ pipeline {
   environment {
     registry = "docker.io/witchpoutraining"
     registryCredential = 'docker-hub-credentials'
-    dockerImage = 'starwit-app'
+    dockerImage = ''
   }
   agent any
   stages {
