@@ -8,6 +8,8 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!!" );
+        JsonFileReader fileReader = new JsonFileReader();
+        JsonDto hello = fileReader.readJsonFile("/test.json");
+        System.out.println(hello.getMessage() + " " + hello.getName());
     }
 }
