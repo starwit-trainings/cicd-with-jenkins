@@ -1,0 +1,7 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: test-config
+data:
+  # Configuration values can be set as key-value properties
+  test: testvalue
