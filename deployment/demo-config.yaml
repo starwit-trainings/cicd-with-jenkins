@@ -4,10 +4,10 @@ data:
     <html>
 
     <head>
-        <title>Hello World!</title>
+        <title>Hello Training!</title>
     </head>
 
-    <body>Hello World!</body>
+    <body>Hello Training!</body>
 
     </html>
 kind: ConfigMap
