@@ -1,12 +1,14 @@
 pipeline {
     agent any
+    environment {     
+        KUBECONFIG=/var/lib/jenkins/.kube/k3s.yaml     
+    } 
     stages {
         stage('kubectl get all') {
             steps {
                 sh '''
                     echo $USER
                     echo $KUBECONFIG
-                    cat /var/lib/jenkins/.kube/k3s.yaml
                     cd deployment
                     kubectl get all --all-namespaces
                     kubectl -n default apply -f test-config.yaml
