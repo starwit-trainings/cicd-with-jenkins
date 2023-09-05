@@ -16,7 +16,6 @@ pipeline {
                 '''
             }
         }
-
         stage ('Build') {
             steps {
                 sh '''
@@ -33,44 +32,43 @@ pipeline {
                 '''
             }
         }
-                    stage('docker version') {
-                        steps {
-                            sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
-                        }
-                    }
-                    stage('Login to Docker Hub') {
-                        steps{
-                            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                            echo 'Login Completed'
-                        }
-                    }
-                    stage('docker build') {
-                        steps {
-                            sh '''
-                                cd my-app
-                                docker build -t witchpoutraining/my-app .
-                            '''
-                        }
-                    }
-                    stage('docker push') {
-                        steps {
-                            sh '''
-                                cd my-app
-                                docker push witchpoutraining/my-app
-                            '''
-                        }
-                    }
-                    stage('docker logout') {
-                        steps {
-                            sh "docker logout" // DOCKER_CERT_PATH is automatically picked up by the Docker client
-                        }
-                    }
-            post {
-                always {
-                    junit  skipPublishingChecks: true, testResults: 'my-app/target/surefire-reports/*.xml'
-                    sh "docker logout"
-                }
+        stage('docker version') {
+            steps {
+                sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
-
+        }
+        stage('Login to Docker Hub') {
+            steps{
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                echo 'Login Completed'
+            }
+        }
+        stage('docker build') {
+            steps {
+                sh '''
+                    cd my-app
+                    docker build -t witchpoutraining/my-app .
+                '''
+            }
+        }
+        stage('docker push') {
+            steps {
+                sh '''
+                    cd my-app
+                    docker push witchpoutraining/my-app
+                '''
+            }
+        }
+        stage('docker logout') {
+            steps {
+                sh "docker logout" // DOCKER_CERT_PATH is automatically picked up by the Docker client
+            }
+        }
+        post {
+            always {
+                junit  skipPublishingChecks: true, testResults: 'my-app/target/surefire-reports/*.xml'
+                sh "docker logout"
+            }
+        }
     }
 }
