@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {     
-        KUBECONFIG=/var/lib/jenkins/.kube/k3s.yaml     
+        KUBECONFIG='/var/lib/jenkins/.kube/k3s.yaml'     
     } 
     stages {
         stage('kubectl get all') {
