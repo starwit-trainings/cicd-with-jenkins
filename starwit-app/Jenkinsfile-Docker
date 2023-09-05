@@ -17,14 +17,18 @@ pipeline {
         } 
         stage('docker build') {
             steps {
-                sh "cd starwit-app"
-                sh "docker build -t witchpoutraining/starwit-app ." // DOCKER_CERT_PATH is automatically picked up by the Docker client
+                sh '''
+                    cd starwit-app
+                    docker build -t witchpoutraining/starwit-app .
+                ''' 
             }
         }
         stage('docker push') {
             steps {
-                sh "cd starwit-app"
-                sh "docker push witchpoutraining/starwit-app" // DOCKER_CERT_PATH is automatically picked up by the Docker client
+                sh '''
+                    cd starwit-app
+                    docker push witchpoutraining/starwit-app
+                ''' 
             }
         }
         stage('docker logout') {
