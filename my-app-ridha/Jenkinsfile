@@ -35,13 +35,13 @@ pipeline {
                 }
             }
         }
-        /*stage('Docker Build') {
+        stage('Docker Build') {
             steps {
                 sh '''
-                    cd starwit-app
-                    docker build -t starwit-app .
+                    cd my-app-ridha
+                    docker build -t my-app-ridha .
                 '''
             }
-        }*/
+        }
     }
 }
