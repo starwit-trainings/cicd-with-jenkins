@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vuedemo
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /vuedemo
+        pathType: Prefix
+        backend:
+          service:
+            name: vuedemo
+            port:
+              number: 80

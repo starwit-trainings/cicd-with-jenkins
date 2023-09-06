@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vuedemo
+spec:
+  selector:
+    matchLabels:
+      app: vuedemo
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vuedemo
+    spec:
+      containers:
+      - name: vuedemo
+        image: witchpoutraining/vuedemo
+        ports:
+        - containerPort: 8080

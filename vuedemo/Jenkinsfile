@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    environment {
+        KUBECONFIG='/var/lib/jenkins/.kube/k3s.yaml'
+        DOCKERHUB_CREDENTIALS= credentials('docker-hub-credentials')
+    }
+    stages {
+        stage('Login to Docker Hub') {      	
+            steps{                       	
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+                echo 'Login Completed'      
+            }           
+        } 
+        stage('docker build') {
+            steps {
+                sh '''
+                    cd vuedemo
+                    docker build -t witchpoutraining/vuedemo .
+                ''' 
+            }
+        }
+        stage('docker push') {
+            steps {
+                sh '''
+                    cd vuedemo
+                    docker push witchpoutraining/vuedemo
+                ''' 
+            }
+        }
+        stage('docker logout') {
+            steps {
+                sh '''
+                    docker rmi witchpoutraining/vuedemo
+                    docker logout
+                ''' 
+            }
+        }
+        stage('deploy vuedemo') {
+            steps {
+                sh '''
+                    cd vuedemo/chart
+                    helm install vuedemo .
+                ''' 
+            }
+        }
+    }
+}
