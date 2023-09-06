@@ -15,5 +15,8 @@ spec:
       containers:
       - name: testexample
         image: witchpoutraining/testexample
+          env:
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: "testexample"
         ports:
         - containerPort: 8080
