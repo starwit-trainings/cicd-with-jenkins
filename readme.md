@@ -100,3 +100,5 @@ Addon: Jenkins build with Docker
 ## Docker Multi-Platform
 
 * https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/
+
+* vue dockerize: https://v2.vuejs.org/v2/cookbook/dockerize-vuejs-app.html
