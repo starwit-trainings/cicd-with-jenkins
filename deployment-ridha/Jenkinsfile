@@ -9,7 +9,7 @@ pipeline {
                 sh '''
                     echo $USER
                     echo $KUBECONFIG
-                    cd deployment
+                    cd deployment-ridha
                     kubectl get all --all-namespaces
                     kubectl apply -f demo-config.yaml
                     kubectl apply -f demo.yaml
