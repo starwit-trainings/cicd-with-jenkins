@@ -13,7 +13,7 @@ spec:
         app: testexample
     spec:
       containers:
-      - name: witchpoutraining/testexample
+      - name: testexample
         image: witchpoutraining/testexample
         ports:
         - containerPort: 8080
