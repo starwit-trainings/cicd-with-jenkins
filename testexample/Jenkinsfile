@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        KUBECONFIG='/var/lib/jenkins/.kube/k3s.yaml'
+    }
     tools { 
         maven 'maven' 
         jdk 'jdk17' 
@@ -35,5 +38,17 @@ pipeline {
                 }
             }
         }
+        stage('kubectl get all') {
+                    steps {
+                        sh '''
+                            echo $USER
+                            echo $KUBECONFIG
+                            cd testexample
+                            kubectl get all --all-namespaces
+                            kubectl apply -f demo-config.yaml
+                            kubectl apply -f demo.yaml
+                        '''
+                    }
+                }
     }
 }
