@@ -1,32 +1,12 @@
 pipeline {
-    agent any
-    tools { 
-        maven 'maven' 
-        jdk 'jdk17' 
-    }
+  agent any
     environment {     
         DOCKERHUB_CREDENTIALS= credentials('docker-hub-credentials')     
-    }
+    } 
     stages {
-        stage ('Build') {
+        stage('docker version') {
             steps {
-                sh '''
-                    cd starwit-app
-                    mvn -B -DskipTests clean package
-                ''' 
-            }
-        }
-        stage('Test') {
-            steps {
-                sh '''
-                    cd starwit-app
-                    mvn test
-                ''' 
-            }
-            post {
-                always {
-                    junit  skipPublishingChecks: true, testResults: 'starwit-app/target/surefire-reports/*.xml'
-                }
+                sh "docker version" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
         }
         stage('Login to Docker Hub') {      	
@@ -53,9 +33,7 @@ pipeline {
         }
         stage('docker logout') {
             steps {
-                sh '''
-                    docker logout
-                ''' 
+                sh "docker logout" // DOCKER_CERT_PATH is automatically picked up by the Docker client
             }
         }
     }

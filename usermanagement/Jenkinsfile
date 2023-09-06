@@ -3,6 +3,7 @@ pipeline {
     tools { 
         maven 'maven' 
         jdk 'jdk17' 
+        nodejs 'NodeJS20'
     }
     stages {
         stage ('Initialize') {
@@ -13,12 +14,19 @@ pipeline {
                 ''' 
             }
         }
-
+        stage('npm build') {
+            steps {
+                sh '''
+                    cd usermanagement/webclient/app
+                    npm install --legacy-peer-deps
+                ''' 
+            }
+        }
         stage ('Build') {
             steps {
                 sh '''
                     cd usermanagement
-                    mvn -B -DskipTests clean package
+                    mvn -B -DskipTests clean package -P frontend
                 ''' 
             }
         }
