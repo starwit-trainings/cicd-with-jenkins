@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/cicd-with-jenkins.iml" filepath="$PROJECT_DIR$/.idea/cicd-with-jenkins.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/seminar_helm.iml" filepath="$PROJECT_DIR$/.idea/seminar_helm.iml" />
     </modules>
   </component>
 </project>
