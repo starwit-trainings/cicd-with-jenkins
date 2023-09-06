@@ -8,7 +8,7 @@ pipeline {
             steps {
                 sh '''
                     cd deploymentCM/demo
-                    helm install demoCM .
+                    helm install democm .
                 ''' 
             }
         }
