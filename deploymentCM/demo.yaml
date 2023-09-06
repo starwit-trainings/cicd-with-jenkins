@@ -55,4 +55,4 @@ spec:
       volumes:
       - name: hello-world-volumeCM
         configMap:
-          name: hello-world-CM
+          name: hello-world-cm
