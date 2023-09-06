@@ -1,0 +1,58 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-world-ridha
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /helloridha
+        pathType: Prefix
+        backend:
+          service:
+            name: hello-world-ridha
+            port:
+              number: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-ridha
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+  selector:
+    app:  hello-world-ridha
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-ridha-nginx
+spec:
+  selector:
+    matchLabels:
+      app: hello-world-ridha
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: hello-world-ridha
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: hello-world-ridha-volume
+          mountPath: /usr/share/nginx/html/helloridha
+      volumes:
+      - name: hello-world-ridha-volume
+        configMap:
+          name: hello-world-ridha
