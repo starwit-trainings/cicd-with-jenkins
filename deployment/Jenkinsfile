@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+    environment {     
+        KUBECONFIG='/var/lib/jenkins/.kube/k3s.yaml'     
+    } 
+    stages {
+        stage('kubectl get all') {
+            steps {
+                sh '''
+                    cd deployment/demo
+                    helm install demo .
+                ''' 
+            }
+        }
+    }
+}
