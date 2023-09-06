@@ -9,7 +9,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /hello
         pathType: Prefix
         backend:
           service:
@@ -51,7 +51,7 @@ spec:
         - containerPort: 80
         volumeMounts:
         - name: hello-world-volume
-          mountPath: /usr/share/nginx/html
+          mountPath: /usr/share/nginx/html/hello
       volumes:
       - name: hello-world-volume
         configMap:
