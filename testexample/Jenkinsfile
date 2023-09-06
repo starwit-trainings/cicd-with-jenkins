@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         KUBECONFIG='/var/lib/jenkins/.kube/k3s.yaml'
+        DOCKERHUB_CREDENTIALS= credentials('docker-hub-credentials')
     }
     tools { 
         maven 'maven' 
@@ -38,17 +39,35 @@ pipeline {
                 }
             }
         }
-        stage('kubectl get all') {
-                    steps {
-                        sh '''
-                            echo $USER
-                            echo $KUBECONFIG
-                            cd testexample
-                            kubectl get all --all-namespaces
-                            kubectl apply -f demo-config.yaml
-                            kubectl apply -f demo.yaml
-                        '''
-                    }
-                }
+        stage('Login to Docker Hub') {      	
+            steps{                       	
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+                echo 'Login Completed'      
+            }           
+        } 
+        stage('docker build') {
+            steps {
+                sh '''
+                    cd starwit-app
+                    docker build -t witchpoutraining/testexample .
+                ''' 
+            }
+        }
+        stage('docker push') {
+            steps {
+                sh '''
+                    cd starwit-app
+                    docker push witchpoutraining/testexample
+                ''' 
+            }
+        }
+        stage('docker logout') {
+            steps {
+                sh '''
+                    docker rmi witchpoutraining/testexample
+                    docker logout
+                ''' 
+            }
+        }
     }
 }
