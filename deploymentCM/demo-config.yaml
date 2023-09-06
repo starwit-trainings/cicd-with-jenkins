@@ -12,4 +12,4 @@ data:
     </html>
 kind: ConfigMap
 metadata:
-  name: hello-world-CM
+  name: hello-world-cm
