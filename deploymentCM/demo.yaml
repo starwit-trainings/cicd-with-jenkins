@@ -27,22 +27,22 @@ spec:
     - port: 80
       protocol: TCP
   selector:
-    app:  hello-world
+    app:  hello-world-CM
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world-nginx
+  name: hello-world-nginxCM
 spec:
   selector:
     matchLabels:
-      app: hello-world
+      app: hello-world-CM
   replicas: 3
   template:
     metadata:
       labels:
-        app: hello-world
+        app: hello-world-CM
     spec:
       containers:
       - name: nginx
@@ -50,9 +50,9 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: hello-world-volume
+        - name: hello-world-volumeCM
           mountPath: /usr/share/nginx/html/helloCM
       volumes:
-      - name: hello-world-volume
+      - name: hello-world-volumeCM
         configMap:
           name: hello-world-CM
