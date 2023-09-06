@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hello-world
+  name: hello-world2
   annotations:
     kubernetes.io/ingress.class: "traefik"
 spec:
@@ -13,7 +13,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: hello-world
+                name: hello-world2
                 port:
                   number: 80
 
@@ -21,28 +21,28 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-world
+  name: hello-world2
 spec:
   ports:
     - port: 80
       protocol: TCP
   selector:
-    app:  hello-world
+    app:  hello-world2
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world-nginx
+  name: hello-world2-nginx
 spec:
   selector:
     matchLabels:
-      app: hello-world
+      app: hello-world2
   replicas: 3
   template:
     metadata:
       labels:
-        app: hello-world
+        app: hello-world2
     spec:
       containers:
         - name: nginx
@@ -50,9 +50,9 @@ spec:
           ports:
             - containerPort: 80
           volumeMounts:
-            - name: hello-world-volume
+            - name: hello-world2-volume
               mountPath: /usr/share/nginx/html/hello
       volumes:
-        - name: hello-world-volume
+        - name: hello-world2-volume
           configMap:
-            name: hello-world
+            name: hello-world2

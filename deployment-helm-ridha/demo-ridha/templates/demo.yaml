@@ -15,4 +15,4 @@ data:
     </html>
 kind: ConfigMap
 metadata:
-  name: hello-world
+  name: hello-world2
