@@ -73,6 +73,7 @@ pipeline {
             steps {
                 sh '''
                     cd testexample/chart
+                    helm uninstall testexample
                     helm install testexample .
                 ''' 
             }

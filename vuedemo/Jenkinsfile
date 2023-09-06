@@ -39,6 +39,7 @@ pipeline {
             steps {
                 sh '''
                     cd vuedemo/chart
+                    helm uninstall vuedemo
                     helm install vuedemo .
                 ''' 
             }
