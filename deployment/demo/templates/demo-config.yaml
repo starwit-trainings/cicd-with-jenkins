@@ -7,7 +7,10 @@ data:
         <title>Hello Training!</title>
     </head>
 
-    <body>Hello Training Java Buildmanagement!</body>
+    <body>Hello Training Java Buildmanagement!
+      <br /> happy helming
+    
+    </body>
 
     </html>
 kind: ConfigMap

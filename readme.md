@@ -91,3 +91,12 @@ Build your project with docker
 ### Addons
 
 Addon: Jenkins build with Docker
+
+## Kubernetes
+
+* K3s Installation: https://docs.k3s.io/quick-start `curl -sfL https://get.k3s.io | sh -`
+* keycloak helm chart: https://github.com/bitnami/charts/tree/main/bitnami/keycloak
+
+## Docker Multi-Platform
+
+* https://www.docker.com/blog/faster-multi-platform-builds-dockerfile-cross-compilation-guide/

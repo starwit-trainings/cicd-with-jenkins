@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        KUBECONFIG='/var/lib/jenkins/.kube/k3s.yaml'
+        DOCKERHUB_CREDENTIALS= credentials('docker-hub-credentials')
+    }
     tools { 
         maven 'maven' 
         jdk 'jdk17' 
@@ -33,6 +37,47 @@ pipeline {
                 always {
                     junit  skipPublishingChecks: true, testResults: 'testexample/target/surefire-reports/*.xml'
                 }
+            }
+        }
+        stage('Login to Docker Hub') {      	
+            steps{                       	
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+                echo 'Login Completed'      
+            }           
+        } 
+        stage('docker build') {
+            steps {
+                sh '''
+                    cd testexample
+                    docker build -t witchpoutraining/testexample .
+                ''' 
+            }
+        }
+        stage('docker push') {
+            steps {
+                sh '''
+                    cd testexample
+                    docker push witchpoutraining/testexample
+                ''' 
+            }
+        }
+        stage('docker logout') {
+            steps {
+                sh '''
+                    docker rmi witchpoutraining/testexample
+                    docker logout
+                ''' 
+            }
+        }
+        stage('deploy testexample') {
+            steps {
+                sh '''
+                    cd testexample/deployment
+                    kubectl apply -f deployment.yml
+                    kubectl apply -f service.yml
+                    kubectl apply -f ingress.yml
+                    kubectl get all -n default
+                ''' 
             }
         }
     }
