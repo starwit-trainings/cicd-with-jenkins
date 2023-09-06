@@ -69,5 +69,16 @@ pipeline {
                 ''' 
             }
         }
+        stage('deploy testexample') {
+            steps {
+                sh '''
+                    cd testexample/deployment
+                    kubectl apply -f deployment.yml
+                    kubectl apply -f service.yml
+                    kubectl apply -f ingress.yml
+                    kubectl get all -n default
+                ''' 
+            }
+        }
     }
 }
